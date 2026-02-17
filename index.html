@@ -20,7 +20,15 @@
         </span>
       </a>
 
-      <nav class="nav-links" aria-label="Főmenü">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menü megnyitása">
+        <span class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Főmenü">
         <a href="#tortenet">Történet</a>
         <a href="#kiemelt">Kiemelt</a>
         <a href="#gyujtemeny">Gyűjtemény</a>
@@ -523,6 +531,23 @@
       localStorage.setItem("theme", isDarkMode ? "dark" : "light");
       themeToggle.textContent = isDarkMode ? "☀️" : "🌙";
       themeToggle.setAttribute("aria-label", isDarkMode ? "Világos mód bekapcsolása" : "Sötét mód bekapcsolása");
+    });
+
+    // HAMBURGER MENÜ TOGGLE
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      navLinks.classList.toggle("active");
+    });
+
+    // Menü bezárása, ha egy hivatkozásra kattintunk
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        navLinks.classList.remove("active");
+      });
     });
 
     // KATEGÓRIA SZŰRÉS
